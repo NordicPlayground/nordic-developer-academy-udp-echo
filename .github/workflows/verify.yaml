@@ -1,0 +1,20 @@
+name: Verify Dockerfile
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build image
+        run: |
+          docker build -t udp-echo \
+            .
+
+      - name: Run image
+        run: docker run -p 2444:2444/udp -d udp-echo
+
+      - name: Run tests
+        run: deno test --allow-net test.ts
