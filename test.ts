@@ -14,11 +14,12 @@ Deno.test("UDP echo server", async (t) => {
       }, 5000);
       client.on("message", (msg: string) => {
         clearTimeout(t);
+        console.log(`<`, msg.toString());
         resolve(msg.toString());
         client.close();
       });
 
-      //sending msg
+      console.log(`>`, msg);
       client.send(msg, 2444, "localhost", () => {});
     });
 
