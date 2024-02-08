@@ -1,0 +1,22 @@
+name: Live test
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Run tests
+        env:
+          HOSTNAME: ${{ vars.HOSTNAME }}
+        run: deno test --allow-net test.ts

@@ -20,7 +20,7 @@ Deno.test("UDP echo server", async (t) => {
       });
 
       console.log(`>`, msg);
-      client.send(msg, 2444, "localhost", () => {});
+      client.send(msg, 2444, Deno.env.get("HOSTNAME") ?? "localhost", () => {});
     });
 
     assertEquals(received.endsWith(msg), true);
