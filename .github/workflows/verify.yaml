@@ -24,7 +24,7 @@ jobs:
         run: docker run -p 2444:2444/udp -d udp-echo
 
       - name: Run tests
-        run: deno test --allow-net test.ts
+        run: deno test --allow-net --allow-env test.ts
 
       - name: Login to Azure Container Registry
         uses: docker/login-action@v3

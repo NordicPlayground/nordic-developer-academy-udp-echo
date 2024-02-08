@@ -19,4 +19,4 @@ jobs:
       - name: Run tests
         env:
           HOSTNAME: ${{ vars.HOSTNAME }}
-        run: deno test --allow-net test.ts
+        run: deno test --allow-net --allow-env test.ts
