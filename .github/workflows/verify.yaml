@@ -5,6 +5,7 @@ on: push
 jobs:
   test:
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - uses: actions/checkout@v4
 
@@ -13,12 +14,28 @@ jobs:
           deno-version: v1.x
 
       - name: Build image
-        run: |
-          docker build -t udp-echo \
-            .
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          load: true
+          tags: udp-echo
 
       - name: Run image
         run: docker run -p 2444:2444/udp -d udp-echo
 
       - name: Run tests
         run: deno test --allow-net test.ts
+
+      - name: Login to Azure Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ secrets.CONTAINER_REGISTRY }}
+          username: ${{ secrets.CONTAINER_REGISTRY_USER }}
+          password: ${{ secrets.CONTAINER_REGISTRY_PASSWORD }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: udp-echo
