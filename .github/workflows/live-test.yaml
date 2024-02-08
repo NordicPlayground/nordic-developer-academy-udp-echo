@@ -16,7 +16,14 @@ jobs:
         with:
           deno-version: v1.x
 
-      - name: Run tests
+      - name: Run tests (IPv4)
         env:
+          PROTO: udp4
+          HOSTNAME: ${{ vars.HOSTNAME }}
+        run: deno test --allow-net --allow-env test.ts
+
+      - name: Run tests (IPv6)
+        env:
+          PROTO: udp6
           HOSTNAME: ${{ vars.HOSTNAME }}
         run: deno test --allow-net --allow-env test.ts
