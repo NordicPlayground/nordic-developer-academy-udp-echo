@@ -1,5 +1,6 @@
 import udp from "node:dgram";
 import { assertEquals } from "https://deno.land/std@0.208.0/assert/mod.ts";
+import { ipv4, ipv6 } from "./ip.ts";
 
 const hostname = Deno.env.get("HOSTNAME") ?? "localhost";
 const proto = Deno.env.get("PROTO") ?? "udp4";
@@ -10,7 +11,9 @@ const port = 2444;
 
 Deno.test("UDP echo server", async (t) => {
   await t.step(
-    `the UDP server at ${hostname}:${port} (${proto}) should echo a given string`,
+    `the UDP server at ${hostname}:${port} (${(
+      await (proto === "udp6" ? ipv6 : ipv4)(hostname)
+    ).join(", ")}) should echo a given string`,
     async () => {
       const msg = `Hello World (${Date.now()})!`;
 
