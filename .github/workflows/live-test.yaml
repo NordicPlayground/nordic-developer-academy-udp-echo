@@ -11,7 +11,10 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    environment: production
+
+    env:
+      HOSTNAME: nscacaudpecho.westeurope.azurecontainer.io
+
     steps:
       - uses: actions/checkout@v4
 
@@ -22,11 +25,11 @@ jobs:
       - name: Run tests (IPv4)
         env:
           PROTO: udp4
-          HOSTNAME: ${{ vars.HOSTNAME }}
+          HOSTNAME: ${{ env.HOSTNAME }}
         run: deno test --allow-net --allow-env test.ts
 
       - name: Run tests (IPv6)
         env:
           PROTO: udp6
-          HOSTNAME: ${{ vars.HOSTNAME }}
+          HOSTNAME: ${{ env.HOSTNAME }}
         run: deno test --allow-net --allow-env test.ts
