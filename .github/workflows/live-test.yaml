@@ -9,7 +9,7 @@ on:
       - ".github/workflows/live-test.yaml"
 
 jobs:
-  test:
+  test-ipv4:
     runs-on: ubuntu-latest
 
     env:
@@ -27,6 +27,22 @@ jobs:
           PROTO: udp4
           HOSTNAME: ${{ env.HOSTNAME }}
         run: deno test --allow-net --allow-env test.ts
+
+  test-ipv6:
+    runs-on: ubuntu-latest
+
+    env:
+      HOSTNAME: udp-echo.nordicsemi.academy
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Set up WARP
+        uses: fscarmen/warp-on-actions@v1.0
 
       - name: Run tests (IPv6)
         env:
