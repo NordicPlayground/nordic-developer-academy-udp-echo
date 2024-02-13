@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      HOSTNAME: nscacaudpecho.westeurope.azurecontainer.io
+      HOSTNAME: udp-echo.nordicsemi.academy
 
     steps:
       - uses: actions/checkout@v4
