@@ -1,3 +1,5 @@
-# Nordic Developer Academy: UDP test server
+# UDP echo server for the Nordic Developer Academy
 
-Ensure that the UDP echo server script works.
+`udp-echo.nordicsemi.academy:2444`
+
+The hostname resolves both with IPv4 and IPv6. 
