@@ -5,14 +5,14 @@ from _thread import *
 import socket 
 import datetime 
 
-localIP     = "0.0.0.0" 
+localIP     = "::" 
 localPort   = 2444 
 bufferSize  = 1024 
 msgFromServer       = "Hello UDP Client" 
 bytesToSend         = str.encode(msgFromServer) 
 
 # Create a datagram socket 
-UDPServerSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM) 
+UDPServerSocket = socket.socket(family=socket.AF_INET6, type=socket.SOCK_DGRAM) 
 
 # Bind to address and ip 
 UDPServerSocket.bind((localIP, localPort)) 
