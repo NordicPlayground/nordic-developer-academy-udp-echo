@@ -13,6 +13,8 @@ EOT
 
 COPY server.py /server.py
 
+RUN mkdir /var/log/academy
+
 EXPOSE 2444/udp
 
 CMD [ "python3", "/server.py"]
