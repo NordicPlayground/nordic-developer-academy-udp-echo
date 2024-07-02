@@ -43,7 +43,14 @@ while(True):
     clientIP  = "Client IP Address:{}".format(address)
     logger.info('UDP-echo')
     print(clientMsg) 
-    print(clientIP) 
+    print(clientIP)
+
+    # Log a custom metric
+    log_dir = '/var/log/academy'
+    log_file = datetime.datetime.now().strftime("%Y-%m-%d") + '-udp-echo.log'
+    log_path = os.path.join(log_dir, log_file)
+    with open(log_path, 'a') as f:
+        f.write(f'{datetime.datetime.now()},UDP,echo\n')
 
     # Sending a reply to client 
     start_new_thread(multi_threaded_client, (message,address )) 
