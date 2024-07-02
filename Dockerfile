@@ -7,6 +7,7 @@ RUN <<EOT
     apt-get -yq install python3 python3-pip
     apt-get -y clean
     rm -rf /var/lib/apt/lists/*
+    mkdir /var/log/academy
     python3 -m pip install opencensus-ext-azure
 EOT
 
