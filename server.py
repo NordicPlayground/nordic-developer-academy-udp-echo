@@ -50,7 +50,7 @@ while(True):
     log_file = datetime.datetime.now().strftime("%Y-%m-%d") + '-udp-echo.log'
     log_path = os.path.join(log_dir, log_file)
     with open(log_path, 'a') as f:
-        f.write(f'{datetime.datetime.now()},UDP,echo\n')
+        f.write(f'{datetime.datetime.now()},echo:UDP,echo\n')
 
     # Sending a reply to client 
     start_new_thread(multi_threaded_client, (message,address )) 
