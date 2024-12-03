@@ -42,7 +42,7 @@ jobs:
           deno-version: v1.x
 
       - name: Set up WARP
-        uses: fscarmen/warp-on-actions@v1.0
+        uses: fscarmen/warp-on-actions@v1.3
 
       - name: Run tests (IPv6)
         env:
