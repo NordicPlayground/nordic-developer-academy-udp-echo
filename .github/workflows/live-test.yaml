@@ -29,7 +29,8 @@ jobs:
         run: deno test --allow-net --allow-env test.ts
 
   test-ipv6:
-    runs-on: ubuntu-latest
+    # openresolv is not available on ubuntu-24.04
+    runs-on: ubuntu-22.04
 
     env:
       HOSTNAME: udp-echo.nordicsemi.academy
